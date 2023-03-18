@@ -1,7 +1,8 @@
 import fs from "fs";
-import __dirname from "../../utils.js";
+import getDirname from "../../utils.js";
 
-const path = "./files/users.json";
+const __dirname = getDirname(import.meta.url);
+const path = __dirname + "/files/users.json";
 
 export default class UserManager {
   constructor() {
@@ -11,7 +12,7 @@ export default class UserManager {
   getAll = async () => {
     if (fs.existsSync(path)) {
       try {
-        let data = await fs.promises.readFile(path, "utf8");
+        const data = await fs.promises.readFile(path, "utf8");
         return JSON.parse(data);
       } catch (error) {
         console.log("Couldn't read file: " + error);
@@ -31,11 +32,11 @@ export default class UserManager {
         //First user
         user.id = 1;
         users.push(user);
-        await fs.promises.writeFile(path, JSON.stringify(users, null, "\t"));
+        await fs.promises.writeFile(path, JSON.stringify(users));
       } else {
         user.id = users[users.length - 1].id + 1;
         users.push(user);
-        await fs.promises.writeFile(path, JSON.stringify(users, null, "\t"));
+        await fs.promises.writeFile(path, JSON.stringify(users));
         return user;
       }
     } catch (error) {

@@ -1,7 +1,8 @@
 import fs from "fs";
-import __dirname from "../../utils.js";
+import getDirname from "../../utils.js";
 
-const path = "./files/courses.json";
+const __dirname = getDirname(import.meta.url);
+const path = __dirname + "/files/courses.json";
 
 export default class CourseManager {
   constructor() {

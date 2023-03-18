@@ -12,7 +12,7 @@ const PORT = 8080;
  * Template engine
  */
 app.engine("handlebars", handlebars.engine());
-app.set("views", __dirname + "/views");
+app.set("views", "/views");
 app.set("view engine", "handlebars");
 
 /**
