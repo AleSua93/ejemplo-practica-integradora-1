@@ -4,6 +4,10 @@ import __dirname from "../../utils.js";
 const path = "./files/users.json";
 
 export default class UserManager {
+  constructor() {
+    console.log("Working users with filesystem");
+  }
+
   getAll = async () => {
     if (fs.existsSync(path)) {
       try {

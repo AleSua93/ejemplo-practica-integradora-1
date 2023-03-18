@@ -4,6 +4,10 @@ import __dirname from "../../utils.js";
 const path = "./files/courses.json";
 
 export default class CourseManager {
+  constructor() {
+    console.log("Working courses with filesystem");
+  }
+
   getAll = async () => {
     if (fs.existsSync(path)) {
       try {

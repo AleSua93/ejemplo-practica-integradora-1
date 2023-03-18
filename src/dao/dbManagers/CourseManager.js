@@ -6,8 +6,6 @@ export default class Courses {
   }
 
   getAll = async () => {
-    //Profe, los cursos son tomados a partir de un lean para su mapeo en handlebars, puedes hacer un map
-    //solamente en caso de que así lo desees (como se muestra en el Manager de usuarios);
     const courses = await coursesModel.find().lean();
 
     return courses;
