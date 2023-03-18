@@ -1,5 +1,6 @@
 import fs from "fs";
 import getDirname from "../../utils.js";
+import { getNextId } from "./files/utils.js";
 
 const __dirname = getDirname(import.meta.url);
 const path = __dirname + "/files/courses.json";
@@ -12,38 +13,31 @@ export default class CourseManager {
   getAll = async () => {
     if (fs.existsSync(path)) {
       try {
-        const data = await fs.promises.readFile(path, "utf8");
+        const data = await fs.promises.readFile(path, "utf-8");
 
         return JSON.parse(data);
       } catch (error) {
-        console.log("Couldn't read file: " + error);
-
-        return null;
+        return [];
       }
-    } else {
-      return [];
     }
+
+    return [];
   };
 
   create = async (course) => {
     try {
-      course.students = [];
-      let courses = await this.getAll();
+      const courses = await this.getAll();
 
-      if (courses.length === 0) {
-        //First course
-        course.id = 1;
-        courses.push(course);
+      const newCourse = {
+        ...course,
+        id: getNextId(courses),
+      };
 
-        await fs.promises.writeFile(path, JSON.stringify(courses, null, "\t"));
-      } else {
-        course.id = courses[courses.length - 1].id + 1;
-        courses.push(course);
+      const updatedCourses = [...courses, newCourse];
 
-        await fs.promises.writeFile(path, JSON.stringify(courses, null, "\t"));
+      await fs.promises.writeFile(path, JSON.stringify(updatedCourses));
 
-        return course;
-      }
+      return newCourse;
     } catch (error) {
       console.log("Couldn't write file: " + error);
       return null;

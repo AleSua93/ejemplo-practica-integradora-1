@@ -1,5 +1,6 @@
 import fs from "fs";
 import getDirname from "../../utils.js";
+import { getNextId } from "./files/utils.js";
 
 const __dirname = getDirname(import.meta.url);
 const path = __dirname + "/files/users.json";
@@ -12,33 +13,32 @@ export default class UserManager {
   getAll = async () => {
     if (fs.existsSync(path)) {
       try {
-        const data = await fs.promises.readFile(path, "utf8");
+        const data = await fs.promises.readFile(path, "utf-8");
+
         return JSON.parse(data);
       } catch (error) {
-        console.log("Couldn't read file: " + error);
-        return null;
+        return [];
       }
-    } else {
-      return [];
     }
+
+    return [];
   };
 
   create = async (user) => {
     try {
-      user.courses = [];
-      let users = await this.getAll();
+      const users = await this.getAll();
 
-      if (users.length === 0) {
-        //First user
-        user.id = 1;
-        users.push(user);
-        await fs.promises.writeFile(path, JSON.stringify(users));
-      } else {
-        user.id = users[users.length - 1].id + 1;
-        users.push(user);
-        await fs.promises.writeFile(path, JSON.stringify(users));
-        return user;
-      }
+      const newUser = {
+        ...user,
+        id: getNextId(users),
+        courses: [],
+      };
+
+      const updatedUsers = [...users, newUser];
+
+      await fs.promises.writeFile(path, JSON.stringify(updatedUsers));
+
+      return newUser;
     } catch (error) {
       console.log("Couldn't write file: " + error);
       return null;
