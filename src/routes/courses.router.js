@@ -12,13 +12,13 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, teacher } = req.body;
 
   let newCourse = {
     title,
     description,
-    users: [],
-    teacher: null,
+    students: [],
+    teacher,
   };
 
   const result = await courseManager.create(newCourse);

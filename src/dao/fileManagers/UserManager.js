@@ -31,7 +31,6 @@ export default class UserManager {
       const newUser = {
         ...user,
         id: getNextId(users),
-        courses: [],
       };
 
       const updatedUsers = [...users, newUser];
