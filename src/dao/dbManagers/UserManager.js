@@ -1,17 +1,14 @@
-import { userModel } from "../models/users.js";
+import userModel from "../models/user.model.js";
 
-export default class Users {
+export default class UserManager {
   constructor() {
     console.log(`Working users with Database persistence in mongodb`);
   }
 
   getAll = async () => {
-    //Profe, los usuarios son tomados a partir de un mapeo para ser leídos correctamente
-    //en handlebars, puedes hacer un lean solamente en caso de que así lo desees
-    //(como se muestra en el Manager de cursos);
-    const users = await userModel.find();
+    const users = await userModel.find().lean();
 
-    return users.map((user) => user.toObject());
+    return users;
   };
 
   create = async (user) => {

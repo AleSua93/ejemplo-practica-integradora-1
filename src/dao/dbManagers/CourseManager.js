@@ -1,4 +1,4 @@
-import coursesModel from "../models/courses.js";
+import courseModel from "../models/course.model.js";
 
 export default class Courses {
   constructor() {
@@ -6,19 +6,19 @@ export default class Courses {
   }
 
   getAll = async () => {
-    const courses = await coursesModel.find().lean();
+    const courses = await courseModel.find().lean();
 
     return courses;
   };
 
   create = async (course) => {
-    const result = await coursesModel.create(course);
+    const result = await courseModel.create(course);
 
     return result;
   };
 
   update = async (id, course) => {
-    const result = await coursesModel.updateOne({ _id: id }, course);
+    const result = await courseModel.updateOne({ _id: id }, course);
 
     return result;
   };

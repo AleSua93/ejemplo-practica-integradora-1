@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userCollection = "Users";
+const usersCollection = "users";
 
 const usersSchema = new mongoose.Schema({
   first_name: {
@@ -21,10 +21,7 @@ const usersSchema = new mongoose.Schema({
     type: String,
     enum: ["M", "F"],
   },
-  courses: {
-    type: Array,
-    default: [],
-  },
 });
 
-export const userModel = mongoose.model(userCollection, usersSchema);
+const userModel = mongoose.model(usersCollection, usersSchema);
+export default userModel;
