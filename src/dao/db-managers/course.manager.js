@@ -22,4 +22,11 @@ export default class Courses {
 
     return result;
   };
+
+  addStudent = async (courseId, studentId) => {
+    const course = await courseModel.findById(courseId);
+    course.students = course.students.push({ studentId });
+
+    return course.save();
+  };
 }

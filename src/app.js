@@ -29,7 +29,7 @@ app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
 
 mongoose
   .connect(
-    "mongodb+srv://Coder:mipassword12@codercluster.kvisivd.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://Coder:mipassword12@codercluster.kvisivd.mongodb.net/practica-integradora-test?retryWrites=true&w=majority"
   )
   .then((conn) => {
     console.log("Connected to DB!");

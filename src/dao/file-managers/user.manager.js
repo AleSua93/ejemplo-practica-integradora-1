@@ -2,7 +2,7 @@ import fs from "fs";
 import __dirname from "../../utils.js";
 import { getNextId } from "./files/utils.js";
 
-const path = __dirname + "/dao/fileManagers/files/courses.json";
+const path = __dirname + "/dao/file-managers/files/courses.json";
 
 export default class UserManager {
   constructor() {

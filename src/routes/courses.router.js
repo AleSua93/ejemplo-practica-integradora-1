@@ -26,4 +26,11 @@ router.post("/", async (req, res) => {
   res.send({ status: "success", payload: result });
 });
 
+router.post("/:courseId/:userId", async (req, res) => {
+  const { courseId, userId } = req.body;
+  const result = await courseManager.addStudent(courseId, userId);
+
+  res.send({ status: "success", payload: result });
+});
+
 export default router;
