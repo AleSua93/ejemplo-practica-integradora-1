@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
 });
 
 router.post("/:courseId/:userId", async (req, res) => {
-  const { courseId, userId } = req.body;
+  const { courseId, userId } = req.params;
   const result = await courseManager.addStudent(courseId, userId);
 
   res.send({ status: "success", payload: result });

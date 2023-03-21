@@ -25,7 +25,7 @@ export default class Courses {
 
   addStudent = async (courseId, studentId) => {
     const course = await courseModel.findById(courseId);
-    course.students = course.students.push({ studentId });
+    course.students.push({ studentId });
 
     return course.save();
   };
