@@ -1,9 +1,8 @@
 import fs from "fs";
-import getDirname from "../../utils.js";
+import __dirname from "../../utils.js";
 import { getNextId } from "./files/utils.js";
 
-const __dirname = getDirname(import.meta.url);
-const path = __dirname + "/files/courses.json";
+const path = __dirname + "/dao/fileManagers/files/courses.json";
 
 export default class CourseManager {
   constructor() {
